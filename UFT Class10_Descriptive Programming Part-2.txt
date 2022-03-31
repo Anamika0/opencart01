@@ -1,0 +1,238 @@
+UFT Class 10
+(Descriptive Programming Part-2)
+Descriptive Programming / Programmatic descriptions
+
+> What is Descriptive Programming?
+
+> Advantages of Descriptive Programming?
+
+> Syntax for writing Test Object statements
+
+Testobject(“PropertyName:=PropertyValue”).Child TestObject(“PropertyName:=PropertyValue”).Method or Operation
+
+Or
+
+Testobject(“Property1Name:=Property1Value”,”Property1Name:=Property1Value”).Child TestObject(“PropertyName:=PropertyValue”).Method or Operation
+
+Example:
+
+Dialog(“text:=Login”).WinButton(“text:=Cancel”).Click
+
+> How to select appropriate Properties information for recognizing objects?
+
+
+ 
+If the development team follows UI design standards then use UFT Object Identification Configuration
+(*UFT Object Identification configuration Based on UI design standards)
+
+If development team not follows UI design standards for some objects then
+select one or two properties and perform dry run, if they are suitable then continue
+otherwise change the properties and perform dry runs.
+
+> Write Descriptive Programming
+a) Steps/Navigation for Login functionality in FR application
+
+i) Launch the Application
+
+ii) Select the Login Dialog box
+
+iii) Enter Agent Name
+
+iv) Enter Password
+
+v) Click OK Button
+——————————
+
+In this navigation we work with 4 objects
+
+Login Dialog box -text property
+
+Agent Name, Password Edit boxes -attached text
+
+OK Button -text
+
+Identify unique properties
+————————————-
+Ex:
+Systemutil.Run “C:\Program Files\HP\Unified Functional Testing\samples\flight\app\flight4a.exe”
+Dialog(“text:=Login”).Activate
+Dialog(“text:=Login”).WinEdit(“attached text:=Agent Name:”).Set “abcd”
+Dialog(“text:=Login”).WinEdit(“attached text:=Password:”).SetSecure “54edcfd7c14cf9a3e6f38219556c9040102f5860”
+Dialog(“text:=Login”).WinButton(“text:=OK”, “height:=23”, “width:=60”).Click
+
+> Centralized maintenance of Test Objects
+Use Constants to replace literal values and place constants in a library file.
+
+By associating the library file access objects information.
+
+
+ 
+If any modifications are there, open the Library file perform changes and save.
+
+VBScript constants
+
+They used to replace literal values and they never change
+
+Syntax:
+
+Const constantName = Value
+
+Ex:
+
+Const city = “London”, num = 100, x =#10/10/2010#
+
+———————————
+Ex:
+
+Dim city
+city=”Hyderabad
+———–
+———-
+———-
+city=”London”
+————-
+———
+————————-
+Const city =”Hyderabad”
+————-
+————-
+———–
+city =”London” *Error
+———————————-
+Ex:
+
+Const Login = “text:=Login”, Agent =”attached text:=Agent Name:”, Password =”attached text:=Password:”
+Const Ok1=”text:=OK”, Ok2=”height:=23″, Ok3=”width:=60″
+
+Systemutil.Run “C:\Program Files\HP\Unified Functional Testing\samples\flight\app\flight4a.exe”
+Dialog(Login).Activate
+Dialog(Login).WinEdit(Agent).Set “abcd”
+Dialog(Login).WinEdit(Password).SetSecure “54edcfd7c14cf9a3e6f38219556c9040102f5860”
+Dialog(Login).WinButton(Ok1, Ok2, Ok3).Click
+
+Create Library file
+
+> Launch Notepad(Editor)
+
+> Type or Paste the code
+
+> Save as .vbs file
+
+Associate Library file
+
+Association two levels
+
+a) Test Level
+
+File menu -> Settings -> Resources ->Click Add symbol -> Browse path of the file -> OK
+
+b) Tool Level
+
+File menu -> Settings -> Resources ->Click Add symbol -> Browse path of the file ->Set As default-> OK
+
+> We can associate one or more library files
+
+Note: For every Test one Library file is not required, you place all objects information
+in a single library file, by associating the library file we can create and execute N number of tests.
+—————————–
+Steps / Navigation for Gmail Login Functionality
+
+i) Launch the Browser and navigate to “www.gmail.com”
+
+ii) Enter Email
+
+iii) Enter Password
+
+iv) Click Sign in Button
+—————————-
+Objects
+———-
+Browser – CreationTime
+
+Page – title
+
+WebEdit – name
+
+webButton -name
+————————–
+Test script:
+
+SystemUtil.Run “C:\Program Files\Internet Explorer\iexplore.exe”, “www.gmail.com”
+Browser(“creationtime:=0”).Page(“title:=Gmail”).WebEdit(“name:=Email”).Set “hariprasaduft@gmail.com”
+Browser(“creationtime:=0”).Page(“title:=Gmail”).WebEdit(“name:=Passwd”).SetSecure “54edd9fc6feecf0a574835932c26c8ad092c53dcd2f8fd88b7dc7cb79ccc7f4d”
+Browser(“creationtime:=0”).Page(“title:=Gmail”).WebButton(“name:=Sign in”).Click
+
+
+Dynamic Discriptive Program
+Handle Duplicate Objects
+Latest Browser CreationTime – N-1 (10 Browsers opened on desktop, 9)
+
+Oldest Browser creation time – 0
+
+Only one Browser opened on Desktop Creation time – 0
+————————————————————-
+Two links with same name
+
+Use index property
+
+Link(“text:=News”, “index:=1”).Click
+
+Descriptive Programming 2 types
+a) Static programming
+
+b) Dynamic Programming
+—————————–
+Assignments:
+————–
+a) write Descriptive Program for Open Order Functionality in Flight Reservation
+
+Base State: Flight Reservation Window
+
+Navigation:
+
+i) Activate the FR window
+
+ii) select File menu
+
+iii) Choose Open Order
+
+iv) Check Order No check box
+
+v) Enter Order Number
+
+vi) Click OK button
+———————————
+b) write Descriptive Program for Customer Registration functionality in dealsdirect.com.au
+
+Base State: None
+
+Navigation:
+
+i) Lunch the Browser and Navigate to dealsdirect.com.au
+
+ii) Click “Register” Link
+
+iii) Enter Email Address
+
+iv) Conform Email Address
+
+v) Choose password
+
+vi) Click Register & Continue Link
+——————————————–
+c) write Descriptive Program for Login functionality in dealsdirect.com.au
+
+Base State: None
+
+Navigation:
+
+i) Lunch the Browser and Navigate to dealsdirect.com.au
+
+ii) Click “Login” Link”
+
+iii) Enter Email Address
+
+iv) Enter Password
+
+v) Click “Login & Continue” Button”
+
